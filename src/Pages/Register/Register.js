@@ -1,22 +1,49 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthProvide";
+import { toast } from "react-toastify";
 
 const Register = () => {
+	const { createUser } = useContext(AuthContext)
+	const [error, setError] = useState('')
+	const [passwordError,setPasswordError]=useState('')
+	
 
-	const handleSubmit = event => {
-		event.preventDefault()
-		const form = event.target
-		const firstName=form.firstName.value
-		const lastName=form.lastName.value
-		const photoUrl=form.photoUrl.value
-		const email=form.email.value
-		const password=form.password.value
-		const confirmPassword = form.confirmPassword.value;
-		console.log(firstName,lastName,photoUrl,email,password,confirmPassword)
-		console.log(form.firstName.value)
-	}
+	
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const firstName = form.firstName.value;
+    const lastName = form.lastName.value;
+    const name = `${firstName} ${lastName}`;
+    const photoUrl = form.photoUrl.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const confirmPassword = form.confirmPassword.value;
+    console.log(
+      firstName,
+      lastName,
+      photoUrl,
+      email,
+      password,
+      confirmPassword
+	  );
+	
+    console.log(form.firstName.value);
+    createUser(email, password)
+      .then((result) => {
+        const user = result.user;
+		  console.log(user);
+		  setError("");
+		  toast.success("Succesfully User Create")
+      })
+		.catch((err) => {
+		  const errorMessage = err.message;
+		  setError(errorMessage);
+      });
+  };
 
-	return (
+  return (
     <div className="max-w-md mx-auto border-2 rounded-lg p-6 my-12">
       <h1 className="text-center text-2xl font-bold text-purple-600">
         Register Form
@@ -36,7 +63,6 @@ const Register = () => {
             id="first_name"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="John"
-			required
           />
         </div>
         <div className="mb-6">
@@ -52,7 +78,6 @@ const Register = () => {
             id="last_name"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Doe"
-			required
           />
         </div>
         <div className="mb-6">
@@ -68,7 +93,6 @@ const Register = () => {
             id="website"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="flowbite.com"
-			required
           />
         </div>
         <div className="mb-6">
@@ -87,6 +111,7 @@ const Register = () => {
             required
           />
         </div>
+        {error && <p className="text-rose-600 -mt-2 mb-3">{error}</p>}
         <div className="mb-6">
           <label
             htmlFor="password"
@@ -97,6 +122,7 @@ const Register = () => {
           <input
             type="password"
             name="password"
+            onBlur={handlePasswordRequired}
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="•••••••••"
             required
@@ -114,7 +140,6 @@ const Register = () => {
             name="confirmPassword"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="•••••••••"
-            required
           />
         </div>
         <div className="flex items-start mb-6">
@@ -148,6 +173,7 @@ const Register = () => {
           Submit
         </button>
       </form>
+
       <p className="mt-6">
         Already have an account?{" "}
         <Link to="/login" className="text-purple-600 font-semibold text-xl">
