@@ -9,7 +9,7 @@ const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
 
   return (
-    <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
+    <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded  dark:bg-gray-900">
       <div className="container flex flex-wrap justify-between items-center mx-auto">
         <Link to="/" className="flex items-center">
           <img src={logo} className="mr-2 sm:h-12 h-6" alt="Flowbite Logo" />
@@ -45,7 +45,7 @@ const NavBar = () => {
           className={`relative w-full md:block md:w-auto ${open && "hidden"}`}
           id="navbar-default"
         >
-          <ul className="absolute w-full md:static md:items-center flex flex-col p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-base md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+          <ul className="absolute z-50 items-center w-full md:static md:items-center flex flex-col p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-5 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             <li>
               <Link
                 to="/home"
@@ -63,12 +63,20 @@ const NavBar = () => {
                 Blogs
               </Link>
             </li>
+            <li>
+              <Link
+                to="/services"
+                className="block py-2 px-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+              >
+                Services
+              </Link>
+            </li>
             {user?.uid ? (
               <>
                 <li>
                   <Link
                     to="/myReviews"
-                    className="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                    className="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent   "
                   >
                     My Reviews
                   </Link>
@@ -88,11 +96,11 @@ const NavBar = () => {
                     </button>
                   </Link>
                 </li>
-                <li>
+                <li className="order-first md:order-last">
                   {user?.uid && (
-                    <span>
+                    <span >
                       {user?.photoURL ? (
-                        <img className="w-12 rounded-full mt-4 md:mt-0" src={user.photoURL} alt="" />
+                        <img className="w-10 rounded-full mt-4 md:mt-0" src={user.photoURL} alt="" />
                       ) : (
                         <FaUserAlt></FaUserAlt>
                       )}

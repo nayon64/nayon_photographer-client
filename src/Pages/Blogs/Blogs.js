@@ -1,9 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import BlogItem from './BlogItem';
 
 const Blogs = () => {
+
+	const [blogs, setBlogs] = useState([])
+	useEffect(() => {
+		fetch("http://localhost:5000/blogs")
+			.then(res => res.json())
+			.then(data => {
+				console.log(data)
+				setBlogs(data)
+			})
+		.catch(err=>console.log(err))
+	},[])
 	return (
-		<div>
-			<h1>This is Blogs page</h1>
+		<div className='container mx-auto p-4'>
+			<h1 className='text-center text-xl my-3 font-bold md:text-3xl text-purple-600'>Our Recent Blogs</h1>
+			<div className='grid md:grid-cols-2 gap-5'>
+				{blogs.map(blog => <BlogItem
+					key={blog._id}
+					blog={blog}
+				></BlogItem>)}
+			</div>
 		</div>
 	);
 };
