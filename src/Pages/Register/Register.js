@@ -2,12 +2,15 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvide";
 import { toast } from "react-toastify";
+import {FaEye ,FaEyeSlash}from "react-icons/fa"
 
 const Register = () => {
 	const { createUser } = useContext(AuthContext)
+	const [showPassword,setShowPassword]=useState(false)
+	const [showConfirmdPassword,setShowConfirmdPassword]=useState(false)
 	const [error, setError] = useState('')
 	const [passwordError,setPasswordError]=useState('')
-	
+	const [confirmdPassword, setConfirmdPassword] = useState("");
 
 	
   const handleSubmit = (event) => {
@@ -19,27 +22,54 @@ const Register = () => {
     const photoUrl = form.photoUrl.value;
     const email = form.email.value;
     const password = form.password.value;
-    const confirmPassword = form.confirmPassword.value;
-    console.log(
-      firstName,
-      lastName,
-      photoUrl,
-      email,
-      password,
-      confirmPassword
-	  );
-	
-    console.log(form.firstName.value);
+	const confirmPassword = form.confirmPassword.value;
+	  
+
+		setError('')
+
+		//   password regex 
+	  
+		if (!/.*[a-z]/.test(password)) {
+			setPasswordError("Enter a Lowercase ");
+			return;
+		}
+		if (!/.*[A-Z]/.test(password)) {
+			setPasswordError("Enter a Uppercase");
+			return;
+		}
+		if (!/.*[0-9]/.test(password)) {
+			setPasswordError("Enter a  number");
+			return;
+		}
+		if (!/.{8,}/.test(password)) {
+			setPasswordError("Enter minimum 8 charecters");
+			return;
+		}
+		
+		//   match password and confirmPassword 
+	  
+	  if (password !== confirmPassword) {
+			setPasswordError("");
+			setConfirmdPassword("Password doesnot match")
+			return;
+		}  
+			
+	//   create user by email and password 
+	  
     createUser(email, password)
       .then((result) => {
         const user = result.user;
 		  console.log(user);
+		  setConfirmdPassword("")
+		  setPasswordError("");
 		  setError("");
 		  toast.success("Succesfully User Create")
       })
 		.catch((err) => {
 		  const errorMessage = err.message;
-		  setError(errorMessage);
+			setError(errorMessage);
+			setConfirmdPassword("");
+     		setPasswordError("");
       });
   };
 
@@ -62,7 +92,7 @@ const Register = () => {
             type="text"
             id="first_name"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="John"
+            placeholder="First Name"
           />
         </div>
         <div className="mb-6">
@@ -77,7 +107,7 @@ const Register = () => {
             type="text"
             id="last_name"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Doe"
+            placeholder="Last Name"
           />
         </div>
         <div className="mb-6">
@@ -92,7 +122,7 @@ const Register = () => {
             name="photoUrl"
             id="website"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="flowbite.com"
+            placeholder="photo URL"
           />
         </div>
         <div className="mb-6">
@@ -107,7 +137,7 @@ const Register = () => {
             name="email"
             id="email"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="john.doe@company.com"
+            placeholder="user@company.com"
             required
           />
         </div>
@@ -119,15 +149,25 @@ const Register = () => {
           >
             Password
           </label>
-          <input
-            type="password"
-            name="password"
-            onBlur={handlePasswordRequired}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="•••••••••"
-            required
-          />
+          <div className="relative flex items-center">
+            <input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              className="bg-gray-50 border  border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Enter your password"
+              required
+            />
+            <span
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 text-xl"
+            >
+              {showPassword ? <FaEye></FaEye> : <FaEyeSlash></FaEyeSlash>}
+            </span>
+          </div>
         </div>
+        {passwordError && (
+          <p className="text-rose-600 -mt-2 mb-3">{passwordError}</p>
+        )}
         <div className="mb-6">
           <label
             htmlFor="confirm_password"
@@ -135,13 +175,26 @@ const Register = () => {
           >
             Confirm password
           </label>
-          <input
-            type="password"
-            name="confirmPassword"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="•••••••••"
-          />
+          <div className="relative flex items-center">
+            <input
+              type={showConfirmdPassword ? "text" : "password"}
+              name="confirmPassword"
+              className="bg-gray-50 border  border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Confirmd Your Password"
+              required
+            />
+            <span
+              onClick={() => setShowConfirmdPassword(!showConfirmdPassword)}
+              className="absolute right-3 text-xl"
+            >
+              {showConfirmdPassword ? <FaEye></FaEye> : <FaEyeSlash></FaEyeSlash>}
+            </span>
+          </div>
+          
         </div>
+        {confirmdPassword && (
+          <p className="text-rose-600 -mt-2 mb-3">{confirmdPassword}</p>
+        )}
         <div className="flex items-start mb-6">
           <div className="flex items-center h-5">
             <input

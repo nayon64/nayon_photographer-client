@@ -4,7 +4,7 @@ import logo from "../../../asset/images/camera-logo.png"
 import { AuthContext } from '../../../context/AuthProvide';
 
 const NavBar = () => {
-	const [open, setOpen] = useState(false)
+	const [open, setOpen] = useState(true)
 	const {displayName}=useContext(AuthContext)
 	return (
 		<nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
