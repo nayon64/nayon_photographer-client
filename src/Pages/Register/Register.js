@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import {FaEye ,FaEyeSlash}from "react-icons/fa"
 
 const Register = () => {
-	const { createUser } = useContext(AuthContext)
+	const { createUser, updateUserProfile } = useContext(AuthContext);
 	const [showPassword,setShowPassword]=useState(false)
 	const [showConfirmdPassword,setShowConfirmdPassword]=useState(false)
 	const [error, setError] = useState('')
@@ -24,31 +24,30 @@ const Register = () => {
     const password = form.password.value;
 	const confirmPassword = form.confirmPassword.value;
 	  
+	setError('')
 
-		setError('')
-
-		//   password regex 
+	//   password regex 
 	  
-		if (!/.*[a-z]/.test(password)) {
-			setPasswordError("Enter a Lowercase ");
-			return;
-		}
-		if (!/.*[A-Z]/.test(password)) {
-			setPasswordError("Enter a Uppercase");
-			return;
-		}
-		if (!/.*[0-9]/.test(password)) {
-			setPasswordError("Enter a  number");
-			return;
-		}
-		if (!/.{8,}/.test(password)) {
-			setPasswordError("Enter minimum 8 charecters");
-			return;
-		}
+	if (!/.*[a-z]/.test(password)) {
+		setPasswordError("Enter a Lowercase ");
+		return;
+	}
+	if (!/.*[A-Z]/.test(password)) {
+		setPasswordError("Enter a Uppercase");
+		return;
+	}
+	if (!/.*[0-9]/.test(password)) {
+		setPasswordError("Enter a  number");
+		return;
+	}
+	if (!/.{8,}/.test(password)) {
+		setPasswordError("Enter minimum 8 charecters");
+		return;
+	}
 		
 		//   match password and confirmPassword 
 	  
-	  if (password !== confirmPassword) {
+	if (password !== confirmPassword) {
 			setPasswordError("");
 			setConfirmdPassword("Password doesnot match")
 			return;
@@ -63,7 +62,12 @@ const Register = () => {
 		  setConfirmdPassword("")
 		  setPasswordError("");
 		  setError("");
-		  toast.success("Succesfully User Create")
+		  updateUserProfile({
+			  displayName: name,
+			  photoURL:photoUrl
+		  })
+		  form.reset()
+		  toast.success("Succesfully Registration Complete")
       })
 		.catch((err) => {
 		  const errorMessage = err.message;
@@ -76,7 +80,7 @@ const Register = () => {
   return (
     <div className="max-w-md mx-auto border-2 rounded-lg p-6 my-12">
       <h1 className="text-center text-2xl font-bold text-purple-600">
-        Register Form
+        Registration Form
       </h1>
 
       <form onSubmit={handleSubmit}>
@@ -223,13 +227,13 @@ const Register = () => {
           type="submit"
           className="text-white bg-purple-700 hover:bg-purple-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
-          Submit
+          Register
         </button>
       </form>
 
       <p className="mt-6">
         Already have an account?{" "}
-        <Link to="/login" className="text-purple-600 font-semibold text-xl">
+        <Link to="/login" className="text-purple-600 font-semibold text-md">
           Log in
         </Link>
       </p>
