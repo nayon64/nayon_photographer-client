@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from "../../../asset/images/camera-logo.png"
+import { AuthContext } from '../../../context/AuthProvide';
 
 const NavBar = () => {
-	const [open,setOpen]=useState(false)
+	const [open, setOpen] = useState(false)
+	const {displayName}=useContext(AuthContext)
 	return (
 		<nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
 			<div className="container flex flex-wrap justify-between items-center mx-auto">
@@ -79,6 +81,9 @@ const NavBar = () => {
 					<Link to="#" className="block">
 						<button className="p-2 ml-2 md:ml-0 rounded md:border-0 bg-purple-700 text-white">Log Out</button>
 					</Link>
+					</li>
+					<li>
+						{displayName}
 					</li>
 				</ul>
 				</div>
