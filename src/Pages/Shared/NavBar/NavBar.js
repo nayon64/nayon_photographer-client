@@ -57,20 +57,21 @@ const NavBar = () => {
             </li>
             <li>
               <Link
-                to="/blogs"
-                className="block py-2 px-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-              >
-                Blogs
-              </Link>
-            </li>
-            <li>
-              <Link
                 to="/services"
                 className="block py-2 px-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
               >
                 Services
               </Link>
             </li>
+            <li>
+              <Link
+                to="/blogs"
+                className="block py-2 px-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+              >
+                Blogs
+              </Link>
+            </li>
+
             {user?.uid ? (
               <>
                 <li>
@@ -98,9 +99,13 @@ const NavBar = () => {
                 </li>
                 <li className="order-first md:order-last">
                   {user?.uid && (
-                    <span >
+                    <span>
                       {user?.photoURL ? (
-                        <img className="w-10 rounded-full mt-4 md:mt-0" src={user.photoURL} alt="" />
+                        <img
+                          className="w-10 rounded-full mt-4 md:mt-0"
+                          src={user.photoURL}
+                          alt=""
+                        />
                       ) : (
                         <FaUserAlt></FaUserAlt>
                       )}

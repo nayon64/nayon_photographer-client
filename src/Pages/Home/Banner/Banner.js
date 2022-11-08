@@ -8,7 +8,7 @@ const Banner = () => {
     console.log("click me")
   }
 	return (
-    <div className="relative flex flex-col-reverse py-16 lg:pt-0 lg:flex-col lg:pb-0 container mx-auto">
+    <div className="relative flex flex-col-reverse py-16 lg:max-h-96 lg:pt-0 lg:flex-col lg:pb-0 container mx-auto">
       <div className="inset-y-0 top-0 right-0 z-0 w-full max-w-xl  px-4 mx-auto md:px-0 lg:pr-0 lg:mb-0 lg:mx-0 lg:w-7/12 lg:max-w-full lg:absolute xl:px-0">
         <svg
           className="absolute left-0 hidden h-full text-white transform -translate-x-1/2 lg:block"
@@ -25,7 +25,7 @@ const Banner = () => {
         />
       </div>
       <div className="relative flex flex-col items-start w-full max-w-xl px-4 mx-auto md:px-0 lg:px-8 lg:max-w-screen-xl ">
-        <div className="mb-16 lg:my-40 lg:max-w-lg lg:pr-5">
+        <div className="mb-16 lg:my-10 lg:max-w-lg lg:pr-5">
           <p className="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-white uppercase rounded-full bg-teal-400">
             Brand new
           </p>

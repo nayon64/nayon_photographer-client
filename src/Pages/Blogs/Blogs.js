@@ -15,7 +15,7 @@ const Blogs = () => {
 	},[])
 	return (
 		<div className='container mx-auto p-4'>
-			<h1 className='text-center text-xl my-3 font-bold md:text-3xl text-purple-600'>Our Recent Blogs</h1>
+			<h1 className='text-center text-xl mb-3 font-bold md:text-2xl text-purple-600'>My Recent Blogs</h1>
 			<div className='grid md:grid-cols-2 gap-5'>
 				{blogs.map(blog => <BlogItem
 					key={blog._id}
