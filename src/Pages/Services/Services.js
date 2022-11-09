@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import ServiceCart from './ServiceCart';
+import ServiceCart from '../Shared/Service.Cart/ServiceCart';
 
 const Services = () => {
 	const [services,setServices]=useState([])
 
 
 	useEffect(() => {
-		fetch("http://localhost:5000/services")
-			.then(res => res.json())
-			.then(data => {
-				console.log(data)
-				setServices(data)
-			})
-		.catch(err=>console.log(err))
+		fetch(`http://localhost:5000/services`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setServices(data);
+      })
+      .catch((err) => console.log(err));
 		
 	},[])
 	return (

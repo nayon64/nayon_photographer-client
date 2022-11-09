@@ -19,13 +19,23 @@ const AddService = () => {
 		event.preventDefault()
 		const agree = window.confirm('You are sure that you will provide this service!! ')
 		if (agree) {
-			const email = user?.email
-			const addNewValue = { ...service, email: email }
+			const email = user?.email ? user.email : "no email";
+			const date = new Date()
+			const addNewValue = { ...service, email: email,date }
 			setService(addNewValue)
+			fetch("http://localhost:5000/services", {
+				method: "POST",
+				headers: {
+					"content-type":"application/json"
+				},
+				body: JSON.stringify(addNewValue)
+			})
+				.then(res => res.json())
+				.then(data => console.log(data))
+			.catch(err=>console.log(err))
 		}
 		
 	}
-	console.log(service);
 
 	return (
     <div className="container mx-auto p-4">

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Exprerience = () => {
 	return (
-    <div className="grid md:grid-cols-2 gap-5 container mx-auto ">
+    <div className="grid md:grid-cols-2 gap-5 container mx-auto border-t-2 mt-6 pt-6">
       <div className="w-full  overflow-hidden p-4 h-96">
         <img
           className="w-full object-cover"
