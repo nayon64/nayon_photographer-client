@@ -1,14 +1,33 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash} from "react-icons/fa";
+import googleImg from "../../asset/images/google.png"
 import { toast } from "react-toastify";
 import { AuthContext } from '../../context/AuthProvide';
+import { GoogleAuthProvider } from 'firebase/auth';
+
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
 
-  const {signIn} =useContext(AuthContext)
+  const { signIn, signInWithProvider } = useContext(AuthContext);
+
+  const googleProvider =new GoogleAuthProvider()
+  
+  const handleGoogleSignIn = () => {
+    signInWithProvider(googleProvider)
+      .then(result => {
+        const user = result.user
+        toast.success("Succesfully google login")
+        console.log(user)
+        setError("")
+      })
+      .catch(err => {
+        console.log(err)
+        setError(err)
+    })
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -71,7 +90,7 @@ const Login = () => {
             />
             <span
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 text-xl"
+              className="absolute right-3 text-xl cursor-pointer"
             >
               {showPassword ? <FaEye></FaEye> : <FaEyeSlash></FaEyeSlash>}
             </span>
@@ -93,6 +112,16 @@ const Login = () => {
           Register
         </Link>
       </p>
+      <p className="font-bold my-3 text-red-700 text-lg text-center">
+        <span>&#8592;</span> OR <span>&#8594;</span>
+      </p>
+      <div
+        onClick={handleGoogleSignIn}
+        className="border-2 rounded-lg flex justify-center cursor-pointer items-center"
+      >
+        <img className="w-6 py-2" src={googleImg} alt="" />
+        <span className="text-base ml-2 font-semibold">Log in with Google</span>
+      </div>
     </div>
   );
 };

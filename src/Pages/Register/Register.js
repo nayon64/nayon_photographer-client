@@ -2,7 +2,8 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvide";
 import { toast } from "react-toastify";
-import {FaEye ,FaEyeSlash}from "react-icons/fa"
+import { FaEye, FaEyeSlash } from "react-icons/fa"
+import googleImg from "../../asset/images/google.png";
 
 const Register = () => {
 	const { createUser, updateUserProfile } = useContext(AuthContext);
@@ -191,10 +192,13 @@ const Register = () => {
               onClick={() => setShowConfirmdPassword(!showConfirmdPassword)}
               className="absolute right-3 text-xl"
             >
-              {showConfirmdPassword ? <FaEye></FaEye> : <FaEyeSlash></FaEyeSlash>}
+              {showConfirmdPassword ? (
+                <FaEye></FaEye>
+              ) : (
+                <FaEyeSlash></FaEyeSlash>
+              )}
             </span>
           </div>
-          
         </div>
         {confirmdPassword && (
           <p className="text-rose-600 -mt-2 mb-3">{confirmdPassword}</p>
@@ -237,6 +241,13 @@ const Register = () => {
           Log in
         </Link>
       </p>
+      <p className="font-bold my-3 text-red-700 text-lg text-center">
+        <span>&#8592;</span> OR <span>&#8594;</span>
+      </p>
+      <div className="border-2 rounded-lg flex justify-center cursor-pointer items-center">
+        <img className="w-6 py-2" src={googleImg} alt="" />
+        <span className="text-base ml-2 font-semibold">Log in with Google</span>
+      </div>
     </div>
   );
 };

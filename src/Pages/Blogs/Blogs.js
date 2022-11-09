@@ -14,7 +14,7 @@ const Blogs = () => {
 		.catch(err=>console.log(err))
 	},[])
 	return (
-		<div className='container mx-auto p-4'>
+		<div className='container mx-auto py-2'>
 			<h1 className='text-center text-xl mb-3 font-bold md:text-2xl text-purple-600'>My Recent Blogs</h1>
 			<div className='grid md:grid-cols-2 gap-5'>
 				{blogs.map(blog => <BlogItem

@@ -6,16 +6,15 @@ import { AuthContext } from '../../context/AuthProvide';
 const ServiceReview = () => {
 
 	const { user } = useContext(AuthContext)
-	const { displayName, photoURL } = user;
 	console.log(user)
 	const reviews="England go into a blockbuster semi-final clash with red-hot India at the Twenty20 World Cup on Thursday high on confidence after Ben Stokes's batting heroics.The Adelaide Oval is expected to be sold out for a clash of the titans between the two top-ranked T20 teams in the world.Jos Buttler's second-ranked England, the reigning 50-over world champions are gaining momentum after a less-than convincing win over Afghanistan, a shock defeat to Ireland in a rain-hit match and a washout against Australia left them having to win their final two Super 12 matches.They outplayed New Zealand before an unbeaten 42 by Test captain Stokes, whose selection for the T20 team had come under fire, ensured a tense win over Sri Lanka to secure a semi-final berth."
 
 	const userPhoto = (
     <>
       {user?.photoURL ? (
-        <img className="w-12 rounded-full" src={photoURL} alt="" />
+        <img className="w-12 rounded-full" src={user.photoURL} alt="" />
       ) : (
-        <FaUser></FaUser>
+        <FaUser className='text-2xl mx-auto'></FaUser>
       )}
     </>
   );
@@ -45,7 +44,7 @@ const ServiceReview = () => {
                 <div className="flex items-center">
                   <div className="sm:hidden mr-3 my-2">{userPhoto}</div>
                   <h5 className="mb-1 font-semibold text-lg text-gray-700">
-                    {user?.displayName ? displayName : "User"}
+                    {user?.displayName ? user.displayName : "User"}
                   </h5>
                 </div>
                 <form className="flex flex-col">
@@ -75,7 +74,7 @@ const ServiceReview = () => {
               <div className='flex items-center'>
                 <div className="sm:hidden mr-3 my-2">{userPhoto}</div>
                 <h5 className="mb-1 font-semibold text-lg text-gray-700">
-                  {user?.displayName ? displayName : "User"}
+                  {user?.displayName ? user.displayName : "User"}
                 </h5>
               </div>
 			        <p>{reviews}</p>

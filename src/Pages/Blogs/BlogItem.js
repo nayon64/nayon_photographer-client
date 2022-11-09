@@ -2,10 +2,10 @@ import { Card } from 'flowbite-react';
 import React from 'react';
 
 const BlogItem = ({ blog }) => {
-	const {title,details,picture,registered}=blog
+	const {title,details,picture}=blog
   return (
     <div>
-      <Card className="block h-full" imgSrc={picture}>
+      <Card className="h-full" imgSrc={picture}>
         <h5 className="text-2xl font-bold tracking-tight text-gray-700 dark:text-white">
           {title}
         </h5>
