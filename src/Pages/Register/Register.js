@@ -4,14 +4,34 @@ import { AuthContext } from "../../context/AuthProvide";
 import { toast } from "react-toastify";
 import { FaEye, FaEyeSlash } from "react-icons/fa"
 import googleImg from "../../asset/images/google.png";
+import { GoogleAuthProvider } from "firebase/auth";
 
 const Register = () => {
-	const { createUser, updateUserProfile } = useContext(AuthContext);
+	const { createUser, updateUserProfile, signInWithProvider } =
+    useContext(AuthContext);
 	const [showPassword,setShowPassword]=useState(false)
 	const [showConfirmdPassword,setShowConfirmdPassword]=useState(false)
 	const [error, setError] = useState('')
 	const [passwordError,setPasswordError]=useState('')
-	const [confirmdPassword, setConfirmdPassword] = useState("");
+  const [confirmdPassword, setConfirmdPassword] = useState("");
+
+  // google provider for log in  
+  const googleProvider = new GoogleAuthProvider();
+  
+  // google sing in function 
+  const handleGoogleSignIn = () => {
+    signInWithProvider(googleProvider)
+      .then((result) => {
+        const user = result.user;
+        toast.success("Succesfully google login");
+        console.log(user);
+        setError("");
+      })
+      .catch((err) => {
+        console.log(err);
+        setError(err);
+      });
+  };
 
 	
   const handleSubmit = (event) => {
@@ -96,6 +116,7 @@ const Register = () => {
             name="firstName"
             type="text"
             id="first_name"
+            required
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="First Name"
           />
@@ -111,6 +132,7 @@ const Register = () => {
             name="lastName"
             type="text"
             id="last_name"
+            required
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Last Name"
           />
@@ -126,6 +148,7 @@ const Register = () => {
             type="url"
             name="photoUrl"
             id="website"
+            required
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="photo URL"
           />
@@ -244,7 +267,10 @@ const Register = () => {
       <p className="font-bold my-3 text-red-700 text-lg text-center">
         <span>&#8592;</span> OR <span>&#8594;</span>
       </p>
-      <div className="border-2 rounded-lg flex justify-center cursor-pointer items-center">
+      <div
+        onClick={handleGoogleSignIn}
+        className="border-2 rounded-lg flex justify-center cursor-pointer items-center"
+      >
         <img className="w-6 py-2" src={googleImg} alt="" />
         <span className="text-base ml-2 font-semibold">Log in with Google</span>
       </div>

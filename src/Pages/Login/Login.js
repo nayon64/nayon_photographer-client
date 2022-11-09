@@ -13,44 +13,45 @@ const Login = () => {
 
   const { signIn, signInWithProvider } = useContext(AuthContext);
 
-  const googleProvider =new GoogleAuthProvider()
-  
+  // google provider for log in
+  const googleProvider = new GoogleAuthProvider();
+
+  // google sing in function
   const handleGoogleSignIn = () => {
     signInWithProvider(googleProvider)
-      .then(result => {
-        const user = result.user
-        toast.success("Succesfully google login")
+      .then((result) => {
+        const user = result.user;
+        toast.success("Succesfully google login");
         console.log(user)
-        setError("")
+        setError("");
       })
-      .catch(err => {
-        console.log(err)
-        setError(err)
-    })
-  }
+      .catch((err) => {
+        setError(err);
+      });
+  };
 
   const handleSubmit = (event) => {
-    event.preventDefault()
-    const form = event.target
-    const email=form.email.value
-    const password = form.password.value
-    console.log(email, password)
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
     signIn(email, password)
-      .then(result => {
-        const user = result.user
-        console.log(user)
-        form.reset()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        form.reset();
         toast.success("Log in successfull");
-        setError('')
+        setError("");
       })
-      .catch(err => {
+      .catch((err) => {
         const errorMessage = err.message;
-        console.log(errorMessage)
-        setError(errorMessage)
-    })
-  }
-  
-	return (
+        console.log(errorMessage);
+        setError(errorMessage);
+      });
+  };
+
+  return (
     <div className="max-w-md mx-auto border-2 rounded-lg p-6 my-12">
       <h1 className="text-center text-2xl font-bold text-purple-600">
         User Log in
