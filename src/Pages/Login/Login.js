@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash} from "react-icons/fa";
 import googleImg from "../../asset/images/google.png"
 import { toast } from "react-toastify";
@@ -8,28 +8,35 @@ import { GoogleAuthProvider } from 'firebase/auth';
 
 
 const Login = () => {
+  const { signIn, signInWithProvider } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
 
-  const { signIn, signInWithProvider } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  // google provider for log in
+  const from = location.state?.from?.pathname || "/";
+
+  // google provider for signin
   const googleProvider = new GoogleAuthProvider();
 
-  // google sing in function
+  // google signin function
   const handleGoogleSignIn = () => {
     signInWithProvider(googleProvider)
       .then((result) => {
         const user = result.user;
-        toast.success("Succesfully google login");
-        console.log(user)
+        console.log(user);
         setError("");
+        toast.success("Succesfully google login");
+        navigate(from, { replace: true });
       })
       .catch((err) => {
-        setError(err);
+        const errorMessage = err.message;
+        setError(errorMessage);
       });
   };
 
+  // email and password signin function
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -41,8 +48,9 @@ const Login = () => {
         const user = result.user;
         console.log(user);
         form.reset();
-        toast.success("Log in successfull");
         setError("");
+        toast.success("Log in successfull");
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         const errorMessage = err.message;
