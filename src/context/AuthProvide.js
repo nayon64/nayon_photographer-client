@@ -10,7 +10,7 @@ const auth=getAuth(app)
 const AuthProvide = ({ children }) => {
 	
 	const [user, setUser] = useState({})
-	const [loading,setLoading]=useState(true)
+	const [loading,setLoading]=useState(false)
 
 	useEffect(() => {
 		const unSuscribe = onAuthStateChanged(auth, currentUser => {
@@ -36,6 +36,7 @@ const AuthProvide = ({ children }) => {
 
 	// signIn with provider
 	const signInWithProvider = (provider) => {
+		setLoading(true);
 		return signInWithPopup(auth, provider);
 	}
 
@@ -47,6 +48,7 @@ const AuthProvide = ({ children }) => {
 
 	// update user profiel 
 	const updateUserProfile = profile => {
+		setLoading(true);
     	return updateProfile(auth.currentUser, profile);
 	};
 	

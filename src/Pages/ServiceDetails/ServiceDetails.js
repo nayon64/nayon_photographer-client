@@ -1,17 +1,28 @@
-import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+
+import React, { useEffect, useState } from 'react';
+import {  useParams } from 'react-router-dom';
 import ServiceReview from './ServiceReview';
 import ServiceSection from './ServiceSection';
 
-const ServiceDetails = ({ id }) => {
-	const service = useLoaderData()
-	console.log(service)
+const ServiceDetails = () => {
+	const [service, setService] = useState({})
+	const id = useParams().id
+	
+
+	useEffect(() => {
+		fetch(`http://localhost:5000/service/${id}`)
+			.then(res => res.json())
+			.then(data => {
+				console.log(data)
+				setService(data)
+		})
+	},[id])
 	
 	return (
-		<div className='container mx-auto'>
-			<ServiceSection service={service}></ServiceSection>
-			<ServiceReview></ServiceReview>
-		</div>
+    <div className="container mx-auto">
+      <ServiceSection service={service}></ServiceSection>
+      <ServiceReview service={service}></ServiceReview>
+    </div>
   );
 };
 

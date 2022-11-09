@@ -1,18 +1,21 @@
-import { Spinner } from 'flowbite-react';
+
 import React, { useContext } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvide';
 
 const PrivateRoute = ({ children }) => {
 	const { user, loading } = useContext(AuthContext)
-	const location =useLocation()
+	const location = useLocation()
+	
 	if (loading) {
-		<Spinner aria-label="Default status example" />;
+		return <div>Loading...</div>;
 	}
-	if (user) {
-		return children;
+
+	if (!user) {
+		return <Navigate to="/login" state={{ from: location }} replace></Navigate>;
 	}
-	return <Navigate to="/login" state={{from:location}} replace></Navigate>
+	
+	return children;
 };
 
 export default PrivateRoute;
