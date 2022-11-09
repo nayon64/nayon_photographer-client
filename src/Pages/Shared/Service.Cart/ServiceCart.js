@@ -36,7 +36,7 @@ const ServiceCart = ({ service }) => {
             </p>
           </div>
           <Link to={`/serviceDetails/${_id}`}>
-            <button className="bg-purple-600 p-2 mt-3  font-medium text-white rounded-md text-sm">
+            <button className="bg-purple-700 p-2 mt-3  font-medium text-white rounded-md text-sm duration-400 transition-all hover:bg-purple-500">
               View Details
             </button>
           </Link>

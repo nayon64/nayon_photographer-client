@@ -27,7 +27,7 @@ const Banner = () => {
       <div className="relative flex flex-col items-start w-full max-w-xl px-4 mx-auto md:px-0 lg:px-8 lg:max-w-screen-xl ">
         <div className="mb-16 lg:my-10 lg:max-w-lg lg:pr-5">
           <p className="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-white uppercase rounded-full bg-teal-400">
-            Brand new
+            Wedding Season
           </p>
           <h2
             className="mb-5 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none 
