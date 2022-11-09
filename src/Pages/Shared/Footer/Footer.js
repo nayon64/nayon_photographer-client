@@ -2,7 +2,7 @@ import React from 'react';
 import { FaTwitterSquare,FaFacebookSquare,FaInstagramSquare} from "react-icons/fa";
 const Footer = () => {
 	return (
-    <div>
+    <div className='mt-5'>
       <div className="container border-t-4 border-indigo-500 mx-auto flex flex-col items-center py-5">
         <div>
           <h2>Social Media Links</h2>

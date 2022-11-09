@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const ServiceCart = ({ service }) => {
 
-	const { title, about, picture, price, rating } = service;
+	const { title, about, picture, price, rating,_id } = service;
   return (
     <div className="block border rounded-xl overflow-hidden">
       <div className="h-48">
@@ -19,8 +19,8 @@ const ServiceCart = ({ service }) => {
               {about.length > 100 ? <>{about.slice(0, 100) + `...`}</> : about}
             </p>
             <p>{rating}</p>
-            <p className='text-lg text-gray-800 font-medium'>
-              Price : {" "}
+            <p className="text-lg text-gray-800 font-medium">
+              Price :{" "}
               {price <= 10 ? (
                 <span>${price} /per image</span>
               ) : (
@@ -28,7 +28,7 @@ const ServiceCart = ({ service }) => {
               )}
             </p>
           </div>
-          <Link>
+          <Link to={`/serviceDetails/${_id}`}>
             <button className="bg-purple-600 p-2 mt-3  font-medium text-white rounded-md text-sm">
               View Details
             </button>
