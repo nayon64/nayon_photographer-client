@@ -1,11 +1,13 @@
-import React from 'react';
+import React from 'react';;
+
 
 const Portfolio = () => {
-	return (
+    return (
 		<div>
 			
-		</div>
-	);
+	  </div>
+    );
+ 
 };
 
 export default Portfolio;

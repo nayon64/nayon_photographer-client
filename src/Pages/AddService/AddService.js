@@ -39,7 +39,9 @@ const AddService = () => {
 
 	return (
     <div className="container mx-auto p-4">
-      <h1>Add service page</h1>
+      <h1 className="text-center text-xl mb-3 font-bold md:text-2xl text-purple-600">
+        Create Serveise
+      </h1>
       <form
         onSubmit={handleSubmit}
         className="grid md:grid-cols-2 gap-4 max-w-2xl p-4 border rounded-lg mx-auto"
@@ -128,7 +130,12 @@ const AddService = () => {
           />
         </div>
 
-        <Button type="submit">Register new account</Button>
+        <Button
+          className='className="py-2 px-3 bg-purple-600 rounded-md text-white mt-3 text-sm font-medium"'
+          type="submit"
+        >
+          Publishd
+        </Button>
       </form>
     </div>
   );
