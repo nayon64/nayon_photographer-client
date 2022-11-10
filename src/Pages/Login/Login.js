@@ -5,6 +5,7 @@ import googleImg from "../../asset/images/google.png"
 import { toast } from "react-toastify";
 import { AuthContext } from '../../context/AuthProvide';
 import { GoogleAuthProvider } from 'firebase/auth';
+import { Helmet } from 'react-helmet-async';
 
 
 const Login = () => {
@@ -61,6 +62,9 @@ const Login = () => {
 
   return (
     <div className="max-w-md mx-auto border-2 rounded-lg p-6 my-12">
+      <Helmet>
+        <title>Login</title>
+      </Helmet>
       <h1 className="text-center text-2xl font-bold text-purple-600">
         User Log in
       </h1>

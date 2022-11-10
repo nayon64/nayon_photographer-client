@@ -7,14 +7,17 @@ import AuthProvide from './context/AuthProvide';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "react-photo-view/dist/react-photo-view.css";
+import { HelmetProvider } from 'react-helmet-async';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <AuthProvide>
-      <App />
-      <ToastContainer position="top-center" />
-    </AuthProvide>
+    <HelmetProvider>
+      <AuthProvide>
+        <App />
+        <ToastContainer position="top-center" />
+      </AuthProvide>
+    </HelmetProvider>
   </React.StrictMode>
 );
 

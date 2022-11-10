@@ -1,5 +1,6 @@
 import { Button, Label, Textarea, TextInput } from 'flowbite-react';
 import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -34,9 +35,9 @@ const UpdateReview = () => {
     
     // check you are change
     if (review["displayName"] !== undefined || review["reviewValue"] !== undefined) {
-      
+
       // update parmision 
-      const agree = window.confirm("hello");
+      const agree = window.confirm("Confirmd update review!!");
       if (agree) {
           const newDate = new Date();
           review["date"] = newDate;
@@ -66,6 +67,9 @@ const UpdateReview = () => {
 
 	return (
     <div>
+      <Helmet>
+        <title>Update-Review</title>
+      </Helmet>
       <form
         onSubmit={handleUpdate}
         className="flex flex-col gap-4 max-w-lg mx-auto"

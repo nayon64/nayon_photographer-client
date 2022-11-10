@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { FaEye, FaEyeSlash } from "react-icons/fa"
 import googleImg from "../../asset/images/google.png";
 import { GoogleAuthProvider } from "firebase/auth";
+import { Helmet } from "react-helmet-async";
 
 const Register = () => {
 	const { createUser, updateUserProfile, signInWithProvider } =
@@ -100,6 +101,9 @@ const Register = () => {
 
   return (
     <div className="max-w-md mx-auto border-2 rounded-lg p-6 my-12">
+      <Helmet>
+        <title>Registration</title>
+      </Helmet>
       <h1 className="text-center text-2xl font-bold text-purple-600">
         Registration Form
       </h1>

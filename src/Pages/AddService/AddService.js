@@ -1,5 +1,6 @@
 import { Button, Label, Textarea, TextInput } from 'flowbite-react';
 import React, { useContext, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../context/AuthProvide';
 
@@ -43,6 +44,9 @@ const AddService = () => {
 
 	return (
     <div className="container mx-auto p-4">
+      <Helmet>
+        <title>Add Service</title>
+      </Helmet>
       <h1 className="text-center text-xl mb-3 font-bold md:text-2xl text-purple-600">
         Create a New Serveise
       </h1>

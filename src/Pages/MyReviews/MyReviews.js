@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../context/AuthProvide';
@@ -39,6 +40,9 @@ const MyReviews = () => {
 	}
 	return (
     <div>
+      <Helmet>
+        <title>Your Reviews</title>
+      </Helmet>
       <div className={`min-h-[45vh] flex justify-center`}>
         <div
           className={`max-w-2xl mx-auto ${reviews <= 0 ? "hidden" : "block"}`}
