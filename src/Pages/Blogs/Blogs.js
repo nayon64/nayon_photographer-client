@@ -8,7 +8,6 @@ const Blogs = () => {
 		fetch("http://localhost:5000/blogs")
 			.then(res => res.json())
 			.then(data => {
-				console.log(data)
 				setBlogs(data)
 			})
 		.catch(err=>console.log(err))

@@ -13,7 +13,6 @@ const ServiceDetails = () => {
 		fetch(`http://localhost:5000/service/${id}`)
 			.then(res => res.json())
 			.then(data => {
-				console.log(data)
 				setService(data)
 		})
 	},[id])

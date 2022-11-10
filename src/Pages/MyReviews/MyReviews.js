@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../context/AuthProvide';
 
@@ -11,7 +12,6 @@ const MyReviews = () => {
 		fetch(`http://localhost:5000/myReviews/${user.uid}`)
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data);
 				setReviews(data);
 			});
 	}, [user.uid]);
@@ -81,12 +81,11 @@ const MyReviews = () => {
                             </td>
 
                             <td className="py-2 px-3 text-sm font-medium text-right whitespace-nowrap">
-                              <button
-                                href="#"
-                                className="text-blue-600 dark:text-blue-500 hover:underline"
-                              >
-                                Edit
-                              </button>
+                              <Link to={`/updateReviews/${review._id}`}>
+                                <button className="text-blue-600 dark:text-blue-500 hover:underline">
+                                  Edit
+                                </button>
+                              </Link>
                             </td>
                             <td className="py-2 px-3 text-sm font-medium text-right whitespace-nowrap">
                               <button
@@ -106,7 +105,9 @@ const MyReviews = () => {
           </div>
         </div>
         <div className={`${reviews <= 0 ? "block" : "hidden"} self-center`}>
-          <p className="text-4xl font-bold text-purple-600">No Reviews were added.</p>
+          <p className="text-4xl font-bold text-purple-600">
+            No Reviews were added.
+          </p>
         </div>
       </div>
     </div>
