@@ -13,7 +13,7 @@ const UpdateReview = () => {
 	const { id } = useParams()
 
 	useEffect(() => {
-		fetch(`http://localhost:5000/updateReview/${id}`)
+		fetch(`https://nayon-photography-server.vercel.app/updateReview/${id}`)
       .then((res) => res.json())
       .then((data) => {
 		  setStoredReview(data);
@@ -41,7 +41,7 @@ const UpdateReview = () => {
       if (agree) {
           const newDate = new Date();
           review["date"] = newDate;
-          fetch(`http://localhost:5000/updateReview/${id}`, {
+          fetch(`https://nayon-photography-server.vercel.app/updateReview/${id}`, {
             method: "PUT",
             headers: {
               "content-type": "application/json",

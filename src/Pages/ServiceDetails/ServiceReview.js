@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import {  FaUser } from 'react-icons/fa';
+import { FaUser } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../context/AuthProvide';
@@ -11,7 +11,7 @@ const ServiceReview = ({ service }) => {
 
   // load user reviews 
   useEffect(() => {
-    fetch(`http://localhost:5000/reviews/${service._id}`)
+    fetch(`https://nayon-photography-server.vercel.app/reviews/${service._id}`)
         .then(res => res.json())
         .then(data => {
           setReviews(data)
@@ -34,7 +34,7 @@ const ServiceReview = ({ service }) => {
     const review = { date, reviewValue, serviceId, email, userUid, displayName, photoURL, ServiceTitle };
     
     // post review database 
-    fetch(`http://localhost:5000/reviews`, {
+    fetch(`https://nayon-photography-server.vercel.app/reviews`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -10,7 +10,7 @@ const MyReviews = () => {
 	const { user, logOut } = useContext(AuthContext);
 
 	useEffect(() => {
-    fetch(`http://localhost:5000/myReviews/${user.uid}`, {
+    fetch(`https://nayon-photography-server.vercel.app/myReviews/${user.uid}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("user-token")}`,
       },
@@ -30,7 +30,7 @@ const MyReviews = () => {
 	const handleDelete = (id) => {
 		const agree = window.confirm("Confirm delete your review")
 		if (agree) {
-			fetch(`http://localhost:5000/myReviews/${id}`, {
+			fetch(`https://nayon-photography-server.vercel.app/myReviews/${id}`, {
 				method: "DELETE",
 			})
 				.then((res) => res.json())

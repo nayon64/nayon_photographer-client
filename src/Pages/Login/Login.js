@@ -1,11 +1,11 @@
-import React, { useContext, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { FaEye, FaEyeSlash} from "react-icons/fa";
-import googleImg from "../../asset/images/google.png"
-import { toast } from "react-toastify";
-import { AuthContext } from '../../context/AuthProvide';
 import { GoogleAuthProvider } from 'firebase/auth';
+import React, { useContext, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify";
+import googleImg from "../../asset/images/google.png";
+import { AuthContext } from '../../context/AuthProvide';
 
 
 const Login = () => {
@@ -29,7 +29,7 @@ const Login = () => {
         const currentUser = { userUid: user.uid };
 
         // fetch token
-        fetch("http://localhost:5000/jwt", {
+        fetch("https://nayon-photography-server.vercel.app/jwt", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -62,7 +62,7 @@ const Login = () => {
         const currentUser = { userUid: user.uid }
         
         // fetch token 
-        fetch("http://localhost:5000/jwt", {
+        fetch("https://nayon-photography-server.vercel.app/jwt", {
           method: "POST",
           headers: {
             "content-type": "application/json",

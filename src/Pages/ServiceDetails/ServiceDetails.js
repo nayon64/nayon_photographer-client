@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import {  useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import ServiceReview from './ServiceReview';
 import ServiceSection from './ServiceSection';
 
@@ -11,7 +11,7 @@ const ServiceDetails = () => {
 	
 
 	useEffect(() => {
-		fetch(`http://localhost:5000/service/${id}`)
+		fetch(`https://nayon-photography-server.vercel.app/service/${id}`)
 			.then(res => res.json())
 			.then(data => {
 				setService(data)

@@ -1,12 +1,15 @@
 import { Button, Label, Textarea, TextInput } from 'flowbite-react';
 import React, { useContext, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../context/AuthProvide';
 
 const AddService = () => {
 	const { user } = useContext(AuthContext)
-	const [service, setService] = useState({})
+  const [service, setService] = useState({})
+  
+  const navigate=useNavigate()
 	
 	// set input value by onchange 
 	const handleChangeOfInputValue = (event) => {
@@ -25,7 +28,7 @@ const AddService = () => {
 			const date = new Date()
 			const addNewValue = { ...service, email: email,date }
 			setService(addNewValue)
-			fetch("http://localhost:5000/services", {
+			fetch("https://nayon-photography-server.vercel.app/services", {
 				method: "POST",
 				headers: {
 					"content-type":"application/json"
@@ -35,7 +38,8 @@ const AddService = () => {
 				.then(res => res.json())
 				.then(() => {
 					toast.success("Successfuly create a new service!!")
-					event.target.reset()
+          event.target.reset()
+          navigate("/services");
 				})
 			.catch(err=>console.log(err))
 		}
