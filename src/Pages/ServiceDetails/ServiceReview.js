@@ -103,7 +103,7 @@ const ServiceReview = ({ service }) => {
                     required
                   ></textarea>
                   <input
-                    className="py-2 px-3 bg-purple-600 rounded-md text-white mt-3 text-sm font-medium self-end"
+                    className="py-2 px-3 cursor-pointer bg-purple-600 rounded-md text-white mt-3 text-sm font-medium self-end"
                     type="submit"
                     value="Add Review"
                   />
