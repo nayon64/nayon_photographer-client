@@ -8,15 +8,19 @@ const ServiceReview = ({ service }) => {
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([])
 
+
+  // load user reviews 
   useEffect(() => {
     fetch(`http://localhost:5000/reviews/${service._id}`)
-      .then(res => res.json())
-      .then(data => {
-        console.log(data)
-        setReviews(data)
-    })
-},[service._id])
+        .then(res => res.json())
+        .then(data => {
+          console.log(data)
+          setReviews(data)
+      })
+  },[service._id])
 
+
+  // add a new review 
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -28,8 +32,9 @@ const ServiceReview = ({ service }) => {
     const photoURL = user.photoURL;
     const userUid=user.uid
     const reviewValue = form.review.value;
-    const review = { date, reviewValue, serviceId, email, userUid, displayName,photoURL,ServiceTitle };
-    // console.log(review)
+    const review = { date, reviewValue, serviceId, email, userUid, displayName, photoURL, ServiceTitle };
+    
+    // post review database 
     fetch(`http://localhost:5000/reviews`, {
       method: "POST",
       headers: {
@@ -49,7 +54,7 @@ const ServiceReview = ({ service }) => {
       });
   };
   
-
+  // user photo component 
   const userPhoto = (
     <>
       {user?.photoURL ? (

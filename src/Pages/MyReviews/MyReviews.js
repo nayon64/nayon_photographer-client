@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { AuthContext } from '../../context/AuthProvide';
 
 const MyReviews = () => {
@@ -17,18 +18,24 @@ const MyReviews = () => {
 
 	// reviews delete function 
 	const handleDelete = (id) => {
-		fetch(`http://localhost:5000/myReviews/${id}`, {
-			method: "DELETE"
-		})
-			.then(res => res.json())
-			.then(data => {
-				console.log(data)
-				if (data.deletedCount > 0) {
-					const storeReviews = [...reviews]
-					const remainigReview =storeReviews.filter(storeReview=>storeReview._id!==id)
-					setReviews(remainigReview)
-				}
-		})
+		const agree = window.confirm("Confirm delete your review")
+		if (agree) {
+			fetch(`http://localhost:5000/myReviews/${id}`, {
+				method: "DELETE",
+			})
+				.then((res) => res.json())
+				.then((data) => {
+
+					if (data.deletedCount > 0) {
+						const storeReviews = [...reviews];
+						const remainigReview = storeReviews.filter(
+						(storeReview) => storeReview._id !== id
+						);
+						setReviews(remainigReview);
+						toast.success("Review deleted");
+					}
+				});
+		}
 	}
 	return (
     <div>
@@ -45,7 +52,7 @@ const MyReviews = () => {
                 <div className="overflow-hidden ">
                   <table className="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-700">
                     <thead className="bg-gray-100 dark:bg-gray-700 ">
-                      <tr className="w-full">
+                      <tr>
                         <th
                           scope="col"
                           className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
@@ -54,7 +61,7 @@ const MyReviews = () => {
                         </th>
                         <th
                           scope="col"
-                          className="py-3 px-6 w-5/6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                          className="py-3 px-6 text-xs  font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
                         >
                           Review
                         </th>
@@ -69,11 +76,11 @@ const MyReviews = () => {
                             <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
                               {review.ServiceTitle}
                             </td>
-                            <td className="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white">
+                            <td className="py-4 px-6 max-w-lg text-sm whitespace-normal font-medium text-gray-500  dark:text-white">
                               {review.reviewValue}
                             </td>
 
-                            <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
+                            <td className="py-2 px-3 text-sm font-medium text-right whitespace-nowrap">
                               <button
                                 href="#"
                                 className="text-blue-600 dark:text-blue-500 hover:underline"
@@ -81,7 +88,7 @@ const MyReviews = () => {
                                 Edit
                               </button>
                             </td>
-                            <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
+                            <td className="py-2 px-3 text-sm font-medium text-right whitespace-nowrap">
                               <button
                                 onClick={() => handleDelete(review._id)}
                                 className="text-blue-600 dark:text-blue-500 hover:underline"
@@ -99,7 +106,7 @@ const MyReviews = () => {
           </div>
         </div>
         <div className={`${reviews <= 0 ? "block" : "hidden"} self-center`}>
-          <p className="text-5xl font-bold text-purple-600">No Review</p>
+          <p className="text-4xl font-bold text-purple-600">No Reviews were added.</p>
         </div>
       </div>
     </div>
