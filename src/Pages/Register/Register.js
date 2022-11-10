@@ -24,9 +24,28 @@ const Register = () => {
     signInWithProvider(googleProvider)
       .then((result) => {
         const user = result.user;
-        toast.success("Succesfully google login");
-        console.log(user);
-        setError("");
+        const currentUser = { userUid: user.uid };
+
+        // fetch token
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            localStorage.setItem("user-token", data.token);
+            setError("");
+            
+            toast.success("Succesfully google login");
+           
+          });
+        
+        
+        // toast.success("Succesfully google login");
+        // setError("");
       })
       .catch((err) => {
         console.log(err);
@@ -80,17 +99,30 @@ const Register = () => {
     createUser(email, password)
       .then((result) => {
         const user = result.user;
-		  console.log(user);
-		  setConfirmdPassword("")
-		  setPasswordError("");
-		  setError("");
-		  updateUserProfile({
-			  displayName: name,
-			  photoURL:photoUrl
-		  })
-		  form.reset()
-		  toast.success("Succesfully Registration Complete")
+        const currentUser = { userUid: user.uid };
+
+        // fetch token
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            localStorage.setItem("user-token", data.token);
+            setError("");
+            setConfirmdPassword("")
+            setPasswordError("");
+            toast.success("Succesfully Registration Complete");
+            updateUserProfile({
+              displayName: name,
+              photoURL:photoUrl
+            })
+          });
       })
+        
 		.catch((err) => {
 		  const errorMessage = err.message;
 			setError(errorMessage);

@@ -26,10 +26,23 @@ const Login = () => {
     signInWithProvider(googleProvider)
       .then((result) => {
         const user = result.user;
-        console.log(user);
-        setError("");
-        toast.success("Succesfully google login");
-        navigate(from, { replace: true });
+        const currentUser = { userUid: user.uid };
+
+        // fetch token
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            localStorage.setItem("user-token", data.token);
+            setError("");
+            toast.success("Succesfully google login");
+            navigate(from, { replace: true });
+          });
       })
       .catch((err) => {
         const errorMessage = err.message;
