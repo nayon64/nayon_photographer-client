@@ -23,11 +23,12 @@ const ServiceReview = ({ service }) => {
     const date = new Date();
     const serviceId = service._id;
     const email = user.email;
+    const ServiceTitle=service.title
     const displayName = user.displayName;
     const photoURL = user.photoURL;
     const userUid=user.uid
     const reviewValue = form.review.value;
-    const review = { date, reviewValue, serviceId, email, userUid,displayName,photoURL };
+    const review = { date, reviewValue, serviceId, email, userUid, displayName,photoURL,ServiceTitle };
     // console.log(review)
     fetch(`http://localhost:5000/reviews`, {
       method: "POST",
