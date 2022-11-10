@@ -3,14 +3,16 @@ import { Link } from 'react-router-dom';
 import ServiceCart from '../../Shared/Service.Cart/ServiceCart';
 
 const ServicesSection = () => {
-	const [services, setServices] = useState([])
+  const [services, setServices] = useState([])
+  
 	useEffect(() => {
 		fetch(`http://localhost:5000/services?size=${3}`)
 			.then(res => res.json())
 			.then(data => {
 				setServices(data)
 			})
-	},[])
+  }, [])
+  
 	return (
     <div className="border-t-2 mt-10 flex flex-col items-center">
       <h2 className="text-center text-xl my-3  font-bold md:text-3xl text-purple-600">

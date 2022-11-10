@@ -43,19 +43,31 @@ const Login = () => {
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
     signIn(email, password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
-        form.reset();
-        setError("");
-        toast.success("Log in successfull");
-        navigate(from, { replace: true });
+        const currentUser = { userUid: user.uid }
+        
+        // fetch token 
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            localStorage.setItem("user-token", data.token);
+            form.reset();
+            setError("");
+            toast.success("Log in successfull");
+            navigate(from, { replace: true });
+          });
+        
       })
       .catch((err) => {
         const errorMessage = err.message;
-        console.log(errorMessage);
         setError(errorMessage);
       });
   };

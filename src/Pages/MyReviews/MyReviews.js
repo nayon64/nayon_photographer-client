@@ -7,15 +7,24 @@ import { AuthContext } from '../../context/AuthProvide';
 const MyReviews = () => {
 
 	const [reviews, setReviews] = useState([])
-	const {user}=useContext(AuthContext)
+	const { user, logOut } = useContext(AuthContext);
 
 	useEffect(() => {
-		fetch(`http://localhost:5000/myReviews/${user.uid}`)
-			.then((res) => res.json())
-			.then((data) => {
-				setReviews(data);
-			});
-	}, [user.uid]);
+    fetch(`http://localhost:5000/myReviews/${user.uid}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("user-token")}`,
+      },
+    })
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          return logOut();
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setReviews(data);
+      });
+  }, [user.uid, logOut]);
 
 	// reviews delete function 
 	const handleDelete = (id) => {
