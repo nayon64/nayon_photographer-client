@@ -3,10 +3,11 @@ import {  toast } from "react-toastify";
 
 const Banner = () => {
 
-  const expToast = () => {
-    toast.success('helloow')
-    console.log("click me")
-  }
+  const handleHired = () => {
+    toast.success("This button funcion is constructing");
+    console.log("click me");
+  };
+  
 	return (
     <div className="relative flex flex-col-reverse py-16 lg:max-h-96 lg:pt-0 lg:flex-col lg:pb-0 container mx-auto">
       <div className="inset-y-0 top-0 right-0 z-0 w-full max-w-xl  px-4 mx-auto md:px-0 lg:pr-0 lg:mb-0 lg:mx-0 lg:w-7/12 lg:max-w-full lg:absolute xl:px-0">
@@ -41,10 +42,10 @@ const Banner = () => {
           </p>
           <div className="flex items-center">
             <button
-              onClick={expToast}
+              onClick={handleHired}
               className="inline-flex items-center justify-center h-12 px-6 mr-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-purple-700 hover:bg-purple-500 focus:shadow-outline focus:outline-none"
             >
-              Get started
+              Get Hired
             </button>
           </div>
         </div>

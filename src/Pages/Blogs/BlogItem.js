@@ -6,9 +6,11 @@ const BlogItem = ({ blog }) => {
   return (
     <div>
       <Card className="h-full" imgSrc={picture}>
+        {/* blog title  */}
         <h5 className="text-2xl font-bold tracking-tight text-gray-700 dark:text-white">
           {title}
         </h5>
+        {/* blog details  */}
         <p className="font-normal text-gray-700 text-justify dark:text-gray-400">
           {details}
         </p>

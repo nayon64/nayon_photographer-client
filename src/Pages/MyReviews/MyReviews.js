@@ -25,7 +25,8 @@ const MyReviews = () => {
         
       });
   }, [user.uid, logOut]);
-console.log(reviews)
+
+
 	// reviews delete function 
 	const handleDelete = (id) => {
 		const agree = window.confirm("Confirm delete your review")
@@ -46,7 +47,9 @@ console.log(reviews)
 					}
 				});
 		}
-	}
+  }
+  
+  
 	return (
     <div>
       <Helmet>

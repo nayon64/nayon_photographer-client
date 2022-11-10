@@ -1,6 +1,6 @@
 # Nayon Photography
 
-Live Projet Link : [Create React App](https://nayon-photography.web.app/).
+Live Projet Link : [Nayon Photography](https://nayon-photography.web.app/).
 
 ## About Project
 

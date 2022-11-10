@@ -20,14 +20,21 @@ const AddService = () => {
 		setService(newService)
 	}
 
+  // service added function
 	const handleSubmit = (event) => {
 		event.preventDefault()
-		const agree = window.confirm('You are sure that you will provide this service!! ')
+    const agree = window.confirm('You are sure that you will provide this service!! ')
+    
 		if (agree) {
-			const email = user?.email ? user.email : "no email";
-			const date = new Date()
+      const email = user?.email ? user.email : "no email";
+      
+      // create recent date 
+      const date = new Date()
+      
 			const addNewValue = { ...service, email: email,date }
-			setService(addNewValue)
+      setService(addNewValue)
+      
+      // data post server site 
 			fetch("https://nayon-photography-server.vercel.app/services", {
 				method: "POST",
 				headers: {

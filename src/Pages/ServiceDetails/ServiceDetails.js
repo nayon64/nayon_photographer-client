@@ -7,9 +7,10 @@ import ServiceSection from './ServiceSection';
 
 const ServiceDetails = () => {
 	const [service, setService] = useState({})
+	
+	// get id in pantname
 	const id = useParams().id
 	
-
 	useEffect(() => {
 		fetch(`https://nayon-photography-server.vercel.app/service/${id}`)
 			.then(res => res.json())

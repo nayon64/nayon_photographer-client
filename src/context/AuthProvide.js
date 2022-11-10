@@ -12,6 +12,7 @@ const AuthProvide = ({ children }) => {
 	const [user, setUser] = useState({})
 	const [loading,setLoading]=useState(false)
 
+	// loaded user change 
 	useEffect(() => {
 		const unSuscribe = onAuthStateChanged(auth, currentUser => {
 			if (createUser) {
@@ -52,7 +53,8 @@ const AuthProvide = ({ children }) => {
     	return updateProfile(auth.currentUser, profile);
 	};
 	
-	const userInfo = { user, createUser, signIn, logOut, updateUserProfile,signInWithProvider,loading,setLoading };
+	const userInfo = { user, createUser, signIn, logOut, updateUserProfile, signInWithProvider, loading, setLoading };
+	
 	return (
 		<AuthContext.Provider value={userInfo}>
 			{children}

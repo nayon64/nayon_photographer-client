@@ -3,8 +3,8 @@ import { Helmet } from 'react-helmet-async';
 import BlogItem from './BlogItem';
 
 const Blogs = () => {
-
 	const [blogs, setBlogs] = useState([])
+
 	useEffect(() => {
 		fetch("https://nayon-photography-server.vercel.app/blogs")
 			.then(res => res.json())
@@ -12,7 +12,8 @@ const Blogs = () => {
 				setBlogs(data)
 			})
 		.catch(err=>console.log(err))
-	},[])
+	}, [])
+	
 	return (
     <div className="container mx-auto py-2">
       <Helmet>

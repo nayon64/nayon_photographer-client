@@ -5,10 +5,12 @@ import { Link } from 'react-router-dom';
 const ServiceCart = ({ service }) => {
   const { title, about, picture, price, rating, _id } = service;
   
-  
   return (
     <div className="block border rounded-xl overflow-hidden">
       <div className="h-48">
+
+        {/* add react-photo-view  */}
+        
         <PhotoProvider>
           <PhotoView src={picture}>
             <img className="h-full object-cover w-full" src={picture} alt="" />

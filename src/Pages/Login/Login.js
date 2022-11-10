@@ -12,7 +12,8 @@ const Login = () => {
   const { signIn, signInWithProvider } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
-
+ 
+  // react hooks
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -126,6 +127,8 @@ const Login = () => {
               placeholder="Enter your password"
               required
             />
+
+            {/* password show toggle icon  */}
             <span
               onClick={() => setShowPassword(!showPassword)}
               className="absolute right-3 text-xl cursor-pointer"
@@ -153,6 +156,9 @@ const Login = () => {
       <p className="font-bold my-3 text-red-700 text-lg text-center">
         <span>&#8592;</span> OR <span>&#8594;</span>
       </p>
+      
+      {/* google sing in section  */}
+
       <div
         onClick={handleGoogleSignIn}
         className="border-2 rounded-lg flex justify-center cursor-pointer items-center"

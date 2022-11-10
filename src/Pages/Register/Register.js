@@ -8,13 +8,18 @@ import googleImg from "../../asset/images/google.png";
 import { AuthContext } from "../../context/AuthProvide";
 
 const Register = () => {
-	const { createUser, updateUserProfile, signInWithProvider } =
-    useContext(AuthContext);
+
+	// use state hook 
+
 	const [showPassword,setShowPassword]=useState(false)
 	const [showConfirmdPassword,setShowConfirmdPassword]=useState(false)
 	const [error, setError] = useState('')
 	const [passwordError,setPasswordError]=useState('')
   const [confirmdPassword, setConfirmdPassword] = useState("");
+
+  // auth provider data 
+  const { createUser, updateUserProfile, signInWithProvider } =
+    useContext(AuthContext);
 
   // google provider for log in  
   const googleProvider = new GoogleAuthProvider();
@@ -38,14 +43,8 @@ const Register = () => {
           .then((data) => {
             localStorage.setItem("user-token", data.token);
             setError("");
-            
             toast.success("Succesfully google login");
-           
-          });
-        
-        
-        // toast.success("Succesfully google login");
-        // setError("");
+          }); 
       })
       .catch((err) => {
         console.log(err);
@@ -53,7 +52,7 @@ const Register = () => {
       });
   };
 
-	
+	// singup with email and password 
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;

@@ -12,6 +12,7 @@ const PrivateRoute = ({ children }) => {
 		return <Loading></Loading>;
 	}
 
+	// don't user 
 	if (!user) {
 		return <Navigate to="/login" state={{ from: location }} replace></Navigate>;
 	}

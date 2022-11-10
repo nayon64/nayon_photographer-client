@@ -32,6 +32,7 @@ const Services = () => {
       </h1>
 
 		{loading && <Loading></Loading>}
+			
       <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-4 py-4 px-4 md:px-0">
         {services.map((service) => (
           <ServiceCart key={service._id} service={service}></ServiceCart>
