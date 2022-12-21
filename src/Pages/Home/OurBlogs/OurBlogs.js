@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Loading from '../../Shared/Loading/Loading';
+import BlogCard from './BlogCard';
 
 const OurBlogs = () => {
 
@@ -11,20 +13,23 @@ const OurBlogs = () => {
         "https://nayon-photography-server.vercel.app/blogs"
       );
 			const data = await res.json()
-			return data
+			return data.slice(0,3)
 		}
 	})
 	console.log(blogs)
 
+	if (isLoading) {
+		return <Loading></Loading>
+	}
 
 	return (
     <div className="border-t-2 mt-10 flex flex-col items-center">
       <h2 className="text-center text-xl my-3  font-bold md:text-3xl text-purple-600">
-        My Services
+        Our Blogs
       </h2>
       <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-4 py-4 px-4 md:px-0">
-        {blogs.map((service) => (
-          <h1 key={service._id}>Hello</h1>
+        {blogs.map((content) => (
+          <BlogCard key={content._id} content={content}></BlogCard>
         ))}
       </div>
       <Link to="/blogs">
