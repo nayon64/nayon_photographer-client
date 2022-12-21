@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const BlogCard = ({ content }) => {
-  console.log(content);
+	console.log(content);
+	
   return (
     <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
       <img class="rounded-t-lg" src={content?.picture} alt="" />
@@ -17,7 +18,8 @@ const BlogCard = ({ content }) => {
           </p>
         </div>
         <div className="mt-2 ">
-          <Link
+				  <Link
+					  to={`/blog/${content?._id}`}
             class="bg-purple-700 p-2 mt-3  font-medium text-white rounded-md text-sm duration-400 transition-all hover:bg-purple-500"
           >
             Read more

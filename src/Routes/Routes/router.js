@@ -9,6 +9,7 @@ import Register from "../../Pages/Register/Register";
 import ServiceDetails from "../../Pages/ServiceDetails/ServiceDetails";
 import Services from "../../Pages/Services/Services";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import SingleBlog from "../../Pages/SingleBlog/SingleBlog";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: Main } = require("../../layout/Main/Main");
@@ -17,7 +18,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
-    errorElement:<Error404></Error404>,
+    errorElement: <Error404></Error404>,
     children: [
       {
         path: "/",
@@ -32,13 +33,18 @@ const router = createBrowserRouter([
         element: <Blogs></Blogs>,
       },
       {
+        path: "/blog/:id",
+        element: <SingleBlog></SingleBlog>,
+        loader: ({ params }) =>
+          fetch(`https://nayon-photography-server.vercel.app/blog/${params.id}`),
+      },
+      {
         path: "/services",
         element: <Services></Services>,
       },
       {
         path: "/serviceDetails/:id",
         element: <ServiceDetails></ServiceDetails>,
-        
       },
       {
         path: "/myReviews",
